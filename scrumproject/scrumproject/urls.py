@@ -33,6 +33,9 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+   
+   # django debug toolbar
+    path('__debug__/', include('debug_toolbar.urls')),
 
     # swagger drf_yasg
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
@@ -40,3 +43,6 @@ urlpatterns = [
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
 ]
+
+# silk url
+urlpatterns += [path('silk/', include('silk.urls', namespace='silk'))]
