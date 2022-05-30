@@ -14,7 +14,8 @@ class Release(models.Model):
                                 Project,
                                 blank=True,
                                 null=True,
-                                on_delete=models.CASCADE
+                                on_delete=models.CASCADE,
+                                related_name='release'
                             )
     release_date = models.DateTimeField(auto_now_add=True, null=False)
     description = models.TextField()
