@@ -8,7 +8,7 @@ class ProjectViewSet(ModelViewSet):
     serializer_class = ProjectSerializer
 
 class ReleaseViewSet(ModelViewSet):
-    queryset = Release.objects.all()
+    queryset = Release.objects.select_related('project').all()
     serializer_class = ReleaseSerializer
 
 class SprintViewSet(ModelViewSet):
