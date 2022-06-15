@@ -1,5 +1,5 @@
 from platform import release
-from rest_framework.serializers import ModelSerializer, ReadOnlyField
+from rest_framework.serializers import ModelSerializer
 
 from project.models import ( Project, Release, Sprint, Story, Task, DailyStandUp)
 
