@@ -1,7 +1,12 @@
 from rest_framework.viewsets import ModelViewSet
 
 from project.models import (Project, Release, Sprint, Story, Task, DailyStandUp)
-from project.serializers import (DailyStandupSerializer, ProjectSerializer, ReleaseSerializer, SprintSerializer, StorySerializer, TaskSerializer)
+from project.serializers import (DailyStandupSerializer, 
+                                    ProjectSerializer, 
+                                    ReleaseSerializer, 
+                                    SprintSerializer,
+                                    StorySerializer, 
+                                    TaskSerializer)
 
 class ProjectViewSet(ModelViewSet):
     queryset = Project.objects.prefetch_related('release').all()
