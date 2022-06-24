@@ -8,6 +8,5 @@ class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
 
     def get_serializer_class(self):
-        print(self.__dict__)
         return self.serializer_class
 
