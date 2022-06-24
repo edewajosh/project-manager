@@ -6,3 +6,8 @@ class UserViewSet(ModelViewSet):
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def get_serializer_class(self):
+        print(self.__dict__)
+        return self.serializer_class
+
