@@ -18,7 +18,7 @@ class UserManager(BaseUserManager):
         Creates and saves a User with the given email, date of
         birth and password.
         """
-        extra_fields.setdefault('is_staff', True)
+        # extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', False)
         user = self._create_user(
             email=email, 
