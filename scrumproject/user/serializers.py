@@ -17,7 +17,7 @@ class UserSerializer(ModelSerializer):
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
         
-
+# Is a good design pattern to provide an endpoint for creating superusers?
 class AdminUserSerializer(ModelSerializer):
     class Meta:
         model = User
