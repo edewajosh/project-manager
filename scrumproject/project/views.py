@@ -1,4 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
+
+from utils.permissions import IsProjectOwnerOrReadOnly
 
 from project.models import (Project, Release, Sprint, Story, Task, DailyStandUp)
 from project.serializers import (DailyStandupSerializer, 
@@ -9,6 +12,7 @@ from project.serializers import (DailyStandupSerializer,
                                     TaskSerializer)
 
 class ProjectViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated, IsProjectOwnerOrReadOnly]
     queryset = Project.objects.prefetch_related('release').all()
     serializer_class = ProjectSerializer
 
