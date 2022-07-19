@@ -1,1 +1,0 @@
-web: gunicorn scrumproject.asgi --log-file -
