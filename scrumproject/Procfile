@@ -1,1 +1,1 @@
-web: gunicorn scrumproject.wsgi --log-file -
+web:gunicorn scrumproject.wsgi --log-file -
