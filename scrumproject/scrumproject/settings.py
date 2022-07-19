@@ -1,5 +1,8 @@
 import os
 
+# Configure Django App for Heroku.
+import django_heroku
+
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'silk.middleware.SilkyMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -73,7 +77,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'scrumproject.wsgi.application'
 
-
+django_heroku.settings(locals())
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -142,6 +146,8 @@ AUTH_USER_MODEL = 'user.User'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATIC_URL = 'static/'
 
