@@ -27,6 +27,7 @@ class ProjectTests(APITestCase):
         }
         res = self.client.post(token_url, data, format='json')
 
+        # set headers with bearer token generated
         self.client.defaults['HTTP_AUTHORIZATION'] = 'Bearer ' + res.data['access'] 
 
     def test_user_is_active(self):
