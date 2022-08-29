@@ -6,6 +6,34 @@ from project.models import Project
 from user.models import User
 
 class ProjectTests(APITestCase):
+
+    def setUp(self):
+
+        # Ensure to hash the user password when creating a user
+        user = User.objects.create(
+            email="jane.doe@test.com",
+            username= "jane.doe",
+            is_active= True,
+            is_admin=True,
+        )
+        user.set_password("10@testpass")
+        user.save()
+
+        # Generate token
+        token_url ='http://127.0.0.1:8000/api/token/'
+        data = {
+            'email': 'jane.doe@test.com',
+            'password': '10@testpass'
+        }
+        res = self.client.post(token_url, data, format='json')
+
+        self.client.defaults['HTTP_AUTHORIZATION'] = 'Bearer ' + res.data['access'] 
+
+    def test_user_is_active(self):
+        user = User.objects.get(email='jane.doe@test.com')
+        self.assertTrue(user.is_active)
+
+
     def test_create_project(self):
         """
         Ensure we can create a new project object
@@ -71,14 +99,11 @@ class ProjectTests(APITestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
 
     def test_user_login(self):
-        url = ('http://127.0.0.1:8000/api/v1/users/users/')
+        # create user
+        user = User.objects.create(email='john.doe@test.com', username='john.doe', is_active=True)
+        user.set_password('10@testpass')
+        user.save()
 
-        data = {
-                "email": "john.doe@test.com",
-                "username": "john.doe",
-                "is_admin": True,
-                "password": "10@testpass"
-        }
-        self.client.post(url, data, format='json')
+        # login user
         response = self.client.login(email='john.doe@test.com', password='10@testpass')
         self.assertTrue(response)
